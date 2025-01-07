@@ -1,0 +1,63 @@
+*{
+    background-color: #ffddc3;
+}
+form {
+    background-color: #a07a6a;
+    margin: auto;
+    padding: 20px;
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 20px;
+  }
+h2{
+  color:#303b0f
+}
+
+    
+
+
+.inputs{
+    background-color: #ffddc3;
+    border-radius: 10px;
+    border-color: black;
+    padding-right: 30px;
+}
+
+#botao{
+    background-color: #303b0f;
+    color:white;
+    border-radius: 10px;
+    border:none;
+    width: 60%;
+    margin-top: 6px;
+    padding: 10px;
+    font-size: larger; 
+}
+#botao:hover {
+    background-color: #606a3c;
+    color: white;
+    cursor: pointer;
+  }
+
+
+
+input[type="file"] {
+    display: none;
+    
+  }
+  
+  .custom-file-upload {
+    
+    background-color: #303b0f;
+    border-radius: 10px;
+    border:none;
+    display: inline-block;
+    padding: 6px 60px;
+    cursor: pointer;
+  }
+
+  .custom-file-upload:hover{
+    background-color: #606a3c;
+    color: #2F1B1B;
+    cursor: pointer;
+  }

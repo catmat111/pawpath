@@ -1,0 +1,35 @@
+*{
+    background-color: #ffddc3;
+}
+
+form {
+    background-color: #a07a6a;
+    margin: 0 auto;
+    padding: 20px;
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 20px;
+  }
+
+
+.inputs{
+    background-color: white;
+    border-radius: 10px;
+    border-color: black;
+    
+}
+
+.entrar{
+    background-color: #5c2626;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px ridge black;
+    font-size: 0.8rem;
+    height: auto;
+}
+
+  form button:hover {
+    background-color: #ac6a5c;
+    color: white;
+    cursor: pointer;
+  }

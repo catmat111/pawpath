@@ -1,0 +1,14 @@
+*{
+    background-color: #ffddc3;
+}
+
+.botao{
+    border-radius: 10px;
+    width: 20%;
+    height: 10%;
+    position:relative;
+}
+
+.botao:hover{
+    cursor: pointer;
+}
