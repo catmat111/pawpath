@@ -5,7 +5,7 @@
     background-color: #ffddc3; /* Fundo suave */
   }
 
-form {
+#login {
     background-color: #a07a6a;
     margin: auto;
     padding: 2rem;
@@ -14,6 +14,7 @@ form {
     border-radius: 20px;
     flex-wrap: wrap; /* Permite que os itens se reorganizem em telas pequenas */
   }
+
 
 .erro{
     background-color: #a07a6a;
@@ -24,7 +25,7 @@ form {
     margin-left: 7rem;
     
 }
-img{
+.logo{
     position: relative;
     
 }
@@ -44,3 +45,5 @@ img{
   #botao:hover {
     background-color: #606a3c;
   }
+
+  

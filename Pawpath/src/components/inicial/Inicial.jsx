@@ -9,13 +9,13 @@ export default function Inicial() {
             <div classname="logo">
                 <img src={logo} />
             </div>
-            <div className="bloco_login">
+            <div className="bloco">
                 <form>
-                    <Link to="/Login">
-                    <button type="submit" className="botao" id='login'>Login</button>
+                    <Link to="/Login" className='route'>
+                    <button type="submit" className="botao" >Login</button>
                     </Link>
-                    <Link to="/sign_in">
-                    <button type="submit" className="botao" id='sign_in'>Criar conta</button>
+                    <Link to="/sign_in" className='route'>
+                    <button type="submit" className="botao" >Criar conta</button>
                     </Link>
                 </form>
             </div>

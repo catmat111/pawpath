@@ -8,15 +8,18 @@ export default function Sign_in() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [image, setImage] = useState(anonimo); // Inicializando com a imagem 'anonimo'
-  const [id, setId] = useState(null);
   const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
   const navigate = useNavigate();
+
   // Função para obter o próximo ID a partir do localStorage
   const getNextId = () => {
     let lastId = localStorage.getItem('lastId');
+    console.log('Último ID:', lastId); // Debug para verificar o valor do último ID
+
     lastId = lastId ? parseInt(lastId, 10) : 0; // Se não houver, começa em 0
     const nextId = lastId + 1;
     localStorage.setItem('lastId', nextId); // Salva o próximo ID
+    console.log('Próximo ID gerado:', nextId); // Debug para verificar o próximo ID
     return nextId;
   };
 
@@ -33,17 +36,11 @@ export default function Sign_in() {
   // Função para fazer o upload da imagem
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-
-    let imageBase64 = null;
-    if (image !== anonimo) {  // Só converte se a imagem não for a imagem 'anonimo'
-      try {
-        imageBase64 = await convertToBase64(image);
-      } catch (error) {
-        console.error('Erro ao processar a imagem:', error);
-        alert('Erro ao processar a imagem.');
-        return;
-      }
+  
+    // Verificar se o nome e senha não estão vazios
+    if (!name || !password) {
+      alert('Por favor, preencha todos os campos!');
+      return;
     }
 
     // Usando a função getNextId para garantir o incremento sequencial
@@ -54,8 +51,8 @@ export default function Sign_in() {
         id: userId,
         nome: name,
         password: password,
-        image: imageBase64 || anonimo, // Se não tiver imagem, usa a imagem anonimo
-      },
+        image: image // A imagem estará em Base64 ou 'anonimo'
+      }
     };
 
     try {
@@ -76,8 +73,33 @@ export default function Sign_in() {
       alert('Conta criada com sucesso!');
       navigate('/Login');
     } catch (error) {
+      console.log('Dados enviados:', JSON.stringify(body)); // Verifique o que está sendo enviado
       console.error('Erro ao criar usuário:', error);
       alert('Erro ao criar conta.');
+    }
+  };
+
+  // Função para lidar com o upload da imagem e validação do tamanho
+  const handleImageChange = async (e) => {
+    const selectedImage = e.target.files[0];
+    if (selectedImage) {
+      // Limite de 1MB para a imagem
+      const MAX_SIZE = 1 * 1024 * 1024; // 1MB
+
+      if (selectedImage.size > MAX_SIZE) {
+        alert('A imagem é muito grande. Por favor, escolha uma imagem de até 1MB.');
+        return;
+      }
+
+      try {
+        const base64Image = await convertToBase64(selectedImage);
+        setImage(base64Image); // Atualiza para a imagem em Base64
+      } catch (error) {
+        console.error('Erro ao processar a imagem:', error);
+        alert('Erro ao processar a imagem.');
+      }
+    } else {
+      alert('Por favor, selecione uma imagem válida.');
     }
   };
 
@@ -98,19 +120,7 @@ export default function Sign_in() {
               className="inputs"
               type="file"
               accept="image/*"
-              onChange={async (e) => {
-                const selectedImage = e.target.files[0];
-                if (selectedImage) {
-                  try {
-                    // Converte a imagem para base64 e atualiza o estado
-                    const base64Image = await convertToBase64(selectedImage);
-                    setImage(base64Image);  // Atualiza a imagem para a versão em base64
-                  } catch (error) {
-                    console.error('Erro ao processar a imagem:', error);
-                    alert('Erro ao processar a imagem.');
-                  }
-                }
-              }}
+              onChange={handleImageChange}
             />
           </label>
         </div>
@@ -134,9 +144,7 @@ export default function Sign_in() {
             required
           />
           {/* Botão de enviar */}
-          
-          <button type="submit"className="inputs"id="botao">Criar conta</button>
-          
+          <button type="submit" className="inputs" id="botao">Criar conta</button>
         </div>
       </form>
     </div>

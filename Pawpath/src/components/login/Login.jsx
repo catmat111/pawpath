@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import logo from '../../assets/LOGO.png'; // Supondo que o logo esteja no mesmo diretório
 import './Login.css';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
     const [usuarios, setUsuarios] = useState([]);
     const [erro, setErro] = useState('');
+    const navigate = useNavigate();
 
     // Função para fazer o fetch na API
     const fetchUsuarios = async () => {
@@ -42,6 +44,7 @@ const Login = () => {
     
         if (usuario) {
             alert('Login bem-sucedido');
+            navigate('/feed_procurado');
             // Redirecionar ou realizar ação após o login bem-sucedido
         } else {
             setErro('Nome de usuário ou senha inválidos.');
@@ -59,7 +62,7 @@ const Login = () => {
                 <img src={logo} alt="Logo" />
             </div>
             <div className="bloco_login">
-                <form onSubmit={validarLogin}>
+                <form onSubmit={validarLogin} id="login">
                     
                         <input
                             type="text"

@@ -2,7 +2,7 @@
     background-color: #ffddc3;
 }
 
-button{
+.botao{
     background-color: #303b0f;
     margin:5%;
     color: white;
@@ -15,11 +15,15 @@ button{
     transition: background-color 0.3s ease;
 }
 
-button:hover{
+.botao:hover{
     cursor: pointer;
     background-color: #606a3c;
 }
-
-a{
+.bloco{
     background-color: #a07a6a;
+    
+}
+
+.route{
+    background-color: #ffddc3;
 }
