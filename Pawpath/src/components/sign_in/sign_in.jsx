@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from '../../assets/LOGO.png';
 import anonimo from '../../assets/anonimo.png';
 import './sign_in.css';
+import { useNavigate } from "react-router-dom";
 
 export default function Sign_in() {
   const [name, setName] = useState('');
@@ -9,7 +10,7 @@ export default function Sign_in() {
   const [image, setImage] = useState(anonimo); // Inicializando com a imagem 'anonimo'
   const [id, setId] = useState(null);
   const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
-
+  const navigate = useNavigate();
   // Função para obter o próximo ID a partir do localStorage
   const getNextId = () => {
     let lastId = localStorage.getItem('lastId');
@@ -32,6 +33,7 @@ export default function Sign_in() {
   // Função para fazer o upload da imagem
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     let imageBase64 = null;
     if (image !== anonimo) {  // Só converte se a imagem não for a imagem 'anonimo'
@@ -72,6 +74,7 @@ export default function Sign_in() {
       const json = await response.json();
       console.log('Usuário criado com sucesso:', json.folha1);
       alert('Conta criada com sucesso!');
+      navigate('/Login');
     } catch (error) {
       console.error('Erro ao criar usuário:', error);
       alert('Erro ao criar conta.');
@@ -131,13 +134,9 @@ export default function Sign_in() {
             required
           />
           {/* Botão de enviar */}
-          <button
-            type="submit"
-            className="inputs"
-            id="botao"
-          >
-            Criar conta
-          </button>
+          
+          <button type="submit"className="inputs"id="botao">Criar conta</button>
+          
         </div>
       </form>
     </div>

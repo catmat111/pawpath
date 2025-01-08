@@ -2,13 +2,24 @@
     background-color: #ffddc3;
 }
 
-.botao{
+button{
+    background-color: #303b0f;
+    margin:5%;
+    color: white;
     border-radius: 10px;
-    width: 20%;
-    height: 10%;
-    position:relative;
+    border: none;
+    width: 60%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.botao:hover{
+button:hover{
     cursor: pointer;
+    background-color: #606a3c;
+}
+
+a{
+    background-color: #a07a6a;
 }

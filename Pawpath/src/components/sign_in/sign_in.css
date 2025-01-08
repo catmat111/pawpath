@@ -113,6 +113,7 @@ input[type="file"] {
   background-color: #606a3c;
 }
 
+
 /* Responsividade para telas pequenas e médias */
 @media (max-width: 1024px) {
   form div {
