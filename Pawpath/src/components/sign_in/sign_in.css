@@ -1,63 +1,146 @@
-*{
-    background-color: #ffddc3;
-}
-form {
-    background-color: #a07a6a;
-    margin: auto;
-    padding: 20px;
-    width: 50%;
-    border: 1px solid black;
-    border-radius: 20px;
-  }
-h2{
-  color:#303b0f
+/* Reset geral para garantir que todos os elementos comecem sem margens e padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #ffddc3; /* Fundo suave */
 }
 
-    
-
-
-.inputs{
-    background-color: #ffddc3;
-    border-radius: 10px;
-    border-color: black;
-    padding-right: 30px;
+/* Container principal do formulário */
+form div {
+  background-color: #a07a6a;
+  margin: auto;
+  padding: 2rem;
+  width: 50%; /* Largura do formulário em telas grandes */
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between; /* Garante que as divs fiquem lado a lado */
+  align-items: flex-start; /* Alinha os itens no topo */
+  gap: 2rem; /* Espaço entre as divs */
+  flex-wrap: wrap; /* Permite que os itens se reorganizem em telas pequenas */
 }
 
-#botao{
-    background-color: #303b0f;
-    color:white;
-    border-radius: 10px;
-    border:none;
-    width: 60%;
-    margin-top: 6px;
-    padding: 10px;
-    font-size: larger; 
+/* Estilo da div que contém a imagem */
+.div-esquerda {
+  width: 40%; /* A div da esquerda ocupa 40% da largura */
+  text-align: center;
+  margin-bottom: 1rem;
+  float:left;
+  max-height: 350px;
 }
+
+#anonimo {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+  border-radius: 20%;
+  margin-bottom: 1rem;
+  object-fit: cover; /* Garante que a imagem preencha bem o espaço */
+}
+
+/* Estilo da div que contém os inputs */
+.div-direita {
+  width: 55%; /* A div da direita ocupa 55% da largura */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 350px;
+}
+
+/* Cabeçalho */
+h2 {
+  color: #303b0f;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+/* Estilo dos campos de input */
+.inputs {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #303b0f;
+  color: #303b0f;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background-color: #ffddc3;
+  transition: border-color 0.3s ease;
+}
+
+.inputs:focus {
+  border-color: #606a3c; /* Cor de borda quando o campo estiver em foco */
+  outline: none;
+}
+
+/* Estilo do botão de enviar */
+#botao {
+  background-color: #303b0f;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  width: 60%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 #botao:hover {
-    background-color: #606a3c;
-    color: white;
-    cursor: pointer;
-  }
+  background-color: #606a3c;
+}
 
-
-
+/* Estilo para o input de imagem */
 input[type="file"] {
-    display: none;
-    
-  }
-  
-  .custom-file-upload {
-    
-    background-color: #303b0f;
-    border-radius: 10px;
-    border:none;
-    display: inline-block;
-    padding: 6px 60px;
-    cursor: pointer;
+  display: none;
+}
+
+.imagem-input {
+  background-color: #303b0f;
+  border-radius: 10px;
+  border: none;
+  display: inline-block;
+  padding: 6px 20px;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.imagem-input:hover {
+  background-color: #606a3c;
+}
+
+/* Responsividade para telas pequenas e médias */
+@media (max-width: 1024px) {
+  form div {
+    width: 80%; /* O formulário ocupa mais espaço em telas menores */
+    flex-direction: column; /* As divs serão empilhadas verticalmente */
+    align-items: center; /* Centraliza as divs */
+    padding: 1.5rem;
   }
 
-  .custom-file-upload:hover{
-    background-color: #606a3c;
-    color: #2F1B1B;
-    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  form div {
+    width: 90%; /* O formulário ocupa 90% da largura */
+    flex-direction: column; /* As divs serão empilhadas verticalmente */
+    align-items: center;
+    padding: 1rem;
   }
+
+}
+
+@media (max-width: 480px) {
+  form div {
+    width: 100%; /* O formulário ocupa 100% da largura */
+    flex-direction: column; /* As divs serão empilhadas verticalmente */
+    padding: 1rem;
+    align-items: center;
+  }
+
+  
+}
