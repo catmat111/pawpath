@@ -1,0 +1,75 @@
+.navbar {
+    
+        position: fixed; /* Fixa a barra no topo da janela */
+        top: 0; /* Alinha no topo */
+        left: 0; /* Alinha à esquerda */
+        width: 100%; /* Faz com que a barra ocupe toda a largura da página */
+        z-index: 1000; /* Garante que fique acima de outros elementos */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #606a3c; /* Cor de fundo */
+        color: #fff; /* Cor do texto */
+        padding: 1rem;
+    
+    
+  }
+  .navbar * {
+    background-color: #606a3c !important; 
+    
+}
+
+  .logo{
+    width: 40%;
+    border-radius: 10px; 
+  }
+  .navbar-left{
+    margin:0;
+    padding: 0;
+    margin-left: -10%;
+    margin-right: -10%;
+  }
+  
+  
+  .navbar-center .nav-links {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    background-color: #606a3c;
+  }
+  
+  .navbar-center .nav-links li {
+    margin-right: 1rem;
+    background-color: #606a3c;
+  }
+  
+  .navbar-center .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    background-color: #606a3c;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-right .cart-icon,
+  .navbar-right .user-icon {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1rem;
+    position: relative;
+  }
+  
+  .navbar-right .cart-count {
+    background-color: #f44336;
+    color: #fff;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+  }

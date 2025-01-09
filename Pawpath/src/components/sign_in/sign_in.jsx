@@ -105,8 +105,8 @@ export default function Sign_in() {
 
   return (
     <div>
-      <div className="logo">
-        <img src={logo} alt="Logo" />
+      <div >
+        <img src={logo} alt="Logo" className="logo"/>
       </div>
       <h2>Crie sua Conta</h2>
 

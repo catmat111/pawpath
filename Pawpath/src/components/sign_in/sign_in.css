@@ -6,6 +6,7 @@
   background-color: #ffddc3; /* Fundo suave */
 }
 
+
 /* Container principal do formulário */
 form div {
   background-color: #a07a6a;
@@ -17,17 +18,18 @@ form div {
   display: flex;
   justify-content: space-between; /* Garante que as divs fiquem lado a lado */
   align-items: flex-start; /* Alinha os itens no topo */
-  gap: 2rem; /* Espaço entre as divs */
+  gap: 0rem; /* Espaço entre as divs */
   flex-wrap: wrap; /* Permite que os itens se reorganizem em telas pequenas */
 }
 
 /* Estilo da div que contém a imagem */
 .div-esquerda {
-  width: 40%; /* A div da esquerda ocupa 40% da largura */
+  width: 30%; /* A div da esquerda ocupa 40% da largura */
   text-align: center;
   margin-bottom: 1rem;
   float:left;
-  max-height: 400px;
+  margin-left: 15%;
+  size: 40%;
 }
 
 #anonimo {
@@ -41,12 +43,12 @@ form div {
 
 /* Estilo da div que contém os inputs */
 .div-direita {
-  width: 55%; /* A div da direita ocupa 55% da largura */
+  width: 50%; /* A div da direita ocupa 55% da largura */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-height: 400px;
+  height: 5%;
 }
 
 /* Cabeçalho */
@@ -55,6 +57,7 @@ h2 {
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.5rem;
+  padding-left: 40%;
 }
 
 /* Estilo dos campos de input */
@@ -116,17 +119,18 @@ input[type="file"] {
 /* Responsividade para telas pequenas e médias */
 @media (max-width: 1024px) {
   form div {
-    width: 80%; /* O formulário ocupa mais espaço em telas menores */
+    width: 90%; /* O formulário ocupa mais espaço em telas menores */
     flex-direction: column; /* As divs serão empilhadas verticalmente */
     align-items: center; /* Centraliza as divs */
     padding: 1.5rem;
+    
   }
 
 }
 
 @media (max-width: 768px) {
   form div {
-    width: 90%; /* O formulário ocupa 90% da largura */
+    width: 95%; /* O formulário ocupa 90% da largura */
     flex-direction: column; /* As divs serão empilhadas verticalmente */
     align-items: center;
     padding: 1rem;
