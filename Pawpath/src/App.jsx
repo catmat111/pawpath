@@ -5,6 +5,8 @@ import Login from './components/login/Login.jsx'
 import Inicial from './components/inicial/Inicial.jsx'
 import FeedProcurado from './components/feed_procurado/feed_procurado.jsx';
 import User from './components/user/User.jsx';
+import Password from './components/password/password.jsx';
+
 import './App.css'
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
                 <Route path="/sign_in" element={<Sign_in />} /> {/* Página de registro */}
                 <Route path="/FeedProcurado" element={<FeedProcurado />} /> {/* Página do feed procurado */}
                 <Route path="/User" element={<User />} /> {/* Página do user */}
+                <Route path="/Password" element={<Password />} /> {/* Página para mudar a palavra pass */}
             </Routes>
         </Router>
   )

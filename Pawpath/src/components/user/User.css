@@ -1,22 +1,4 @@
-.image {
-    width: 50%;
-    border-radius: 50%;
-    border-color: black;
-    height: auto;
-    max-width: 100px;
-    margin-bottom: 1.5rem;
-    
-}
-
-.top {
-    display: flex;
-    align-items: center;
-}
-
-.nome {
-    margin-left: 20px;
-}
-
+/* Estilos para o container do usuário */
 .user-container {
     background-color: #a07a6a;
     position: relative;
@@ -27,10 +9,51 @@
     padding: 2rem;
     border-radius: 20px;
     box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
 }
 
 .user-container * {
-    background-color: #a07a6a;
+    background-color: transparent;
+    color: white;
+}
+
+/* Estilos para a imagem do usuário */
+.image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+}
+
+/* Estilo para o topo da página com a imagem e nome */
+.top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.nome {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #303b0f;
+}
+
+/* Estilos para o container de senha */
+.password-container {
+    margin-bottom: 2rem;
+}
+
+.password {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    
 }
 
 .mostrar {
@@ -43,8 +66,51 @@
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
- .mostrar:hover {
+    margin-top: 1rem;
+}
+
+.mostrar:hover {
     background-color: #606a3c;
-  }
+}
+
+/* Estilos para as ações (Alterar senha, imagem, deletar conta) */
+.actions {
+    margin-top: 2rem;
+}
+
+.actions p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    color: #e0e0e0;
+}
+
+.actions p:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .user-container {
+        padding: 1rem;
+        top: 10%;
+    }
+
+    .image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .nome {
+        font-size: 1.2rem;
+    }
+
+    .mostrar {
+        width: 80%;
+    }
+
+    .actions p {
+        font-size: 1rem;
+    }
+}

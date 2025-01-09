@@ -82,3 +82,38 @@
     margin-left: 1rem; /* Para deixar um espaço entre os ícones */
     cursor: pointer;
 }
+
+.user-image:hover {
+  transform: scale(1.1); /* Aumenta a imagem ao passar o mouse */
+}
+
+.nav-links li a {
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-right: 10px;
+ 
+}
+.nav-links li a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media (max-width: 807px){
+  .navbar-left{
+    margin:0;
+    padding: 0;
+    margin-left: -20%;
+    margin-right: -20%;
+  }
+}
+@media (max-width: 670px){
+  .navbar-left{
+    margin:0;
+    padding: 0;
+    margin-left: -30%;
+    margin-right: -30%;
+  }
+
+  
+}
+

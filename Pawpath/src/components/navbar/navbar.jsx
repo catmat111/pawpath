@@ -57,10 +57,10 @@ const Navbar = ({ id }) => {
             <div className="navbar-center">
                 <ul className="nav-links">
                     <li>
-                        <a href="/FeedProcurado">Procura-se</a>
+                        <a className='link' href="/FeedProcurado">Procura-se</a>
                     </li>
                     <li>
-                        <a href="/Encontrei um animal">Encontrou-se</a>
+                        <a className='link' href="/Encontrei um animal">Encontrou-se</a>
                     </li>
                 </ul>
             </div>

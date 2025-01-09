@@ -33,6 +33,28 @@ export default function Sign_in() {
     });
   };
 
+  // Função para verificar se o nome de usuário já existe na base de dados
+  const checkIfUserExists = async (name) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Erro ao verificar usuário');
+      }
+      
+      const data = await response.json();
+      const users = data.folha1; // Supondo que os dados retornados sejam uma lista de usuários
+
+      // Verificar se algum usuário tem o mesmo nome
+      const userExists = users.some((user) => user.nome.toLowerCase() === name.toLowerCase());
+
+      return userExists;
+    } catch (error) {
+      console.error('Erro ao verificar o usuário:', error);
+      alert('Erro ao verificar se o nome de usuário já existe.');
+      return false; // Retorna falso em caso de erro na requisição
+    }
+  };
+
   // Função para fazer o upload da imagem
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +62,14 @@ export default function Sign_in() {
     // Verificar se o nome e senha não estão vazios
     if (!name || !password) {
       alert('Por favor, preencha todos os campos!');
+      return;
+    }
+
+    // Verificar se o nome de usuário já existe
+    const userExists = await checkIfUserExists(name);
+
+    if (userExists) {
+      alert('Este nome de usuário já está em uso. Por favor, escolha outro.');
       return;
     }
 
@@ -84,7 +114,7 @@ export default function Sign_in() {
     const selectedImage = e.target.files[0];
     if (selectedImage) {
       // Limite de 1MB para a imagem
-      const MAX_SIZE = 1 * 1024 * 1024; // 1MB
+      const MAX_SIZE = 50 * 1024; // 1MB
 
       if (selectedImage.size > MAX_SIZE) {
         alert('A imagem é muito grande. Por favor, escolha uma imagem de até 1MB.');
