@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../../assets/LOGO.png';
 import anonimo from '../../assets/anonimo.png';
 import './sign_in.css';
@@ -10,17 +10,31 @@ export default function Sign_in() {
   const [image, setImage] = useState(anonimo); // Inicializando com a imagem 'anonimo'
   const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
   const navigate = useNavigate();
+  
 
-  // Função para obter o próximo ID a partir do localStorage
-  const getNextId = () => {
-    let lastId = localStorage.getItem('lastId');
-    console.log('Último ID:', lastId); // Debug para verificar o valor do último ID
+  // Função para buscar todos os usuários e calcular o próximo ID
+  const getNextId = async () => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Erro ao buscar dados');
+      }
 
-    lastId = lastId ? parseInt(lastId, 10) : 0; // Se não houver, começa em 0
-    const nextId = lastId + 1;
-    localStorage.setItem('lastId', nextId); // Salva o próximo ID
-    console.log('Próximo ID gerado:', nextId); // Debug para verificar o próximo ID
-    return nextId;
+      const data = await response.json();
+      const users = data.folha1; // Supondo que os dados retornados sejam uma lista de usuários
+
+      // Se não houver usuários, o ID começa do 1
+      if (users.length === 0) {
+        return 1;
+      }
+
+      // Encontrar o maior ID e adicionar 1 para o próximo ID
+      const maxId = Math.max(...users.map(user => user.id));
+      return maxId + 1;
+    } catch (error) {
+      console.error('Erro ao calcular próximo ID:', error);
+      return 1; // Se ocorrer erro, o ID será 1
+    }
   };
 
   // Função para converter imagem em Base64
@@ -74,7 +88,7 @@ export default function Sign_in() {
     }
 
     // Usando a função getNextId para garantir o incremento sequencial
-    const userId = getNextId();
+    const userId = await getNextId();
 
     const body = {
       folha1: {
