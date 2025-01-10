@@ -9,26 +9,23 @@
     background-color: #a07a6a;
     margin: auto;
     padding: 2rem;
-    width: 60%; /* Largura do formulário em telas grandes */
-    border: 1px solid black;
+    width: 60%; 
+    border: 2px solid #303b0f;
     border-radius: 20px;
-    flex-wrap: wrap; /* Permite que os itens se reorganizem em telas pequenas */
+    
   }
 
 
 .erro{
     background-color: #a07a6a;
-    border: 1px solid black;
+    border: 2px solid #303b0f;
     border-radius: 20px;
     margin: 5%;
     width: 60%;
     margin-left: 7rem;
     
 }
-.logo{
-    position: relative;
-    
-}
+
 
 #botao {
     background-color: #303b0f;
@@ -38,12 +35,12 @@
     width: 60%;
     padding: 1rem;
     font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.7s ease;
   }
   
   #botao:hover {
     background-color: #606a3c;
+    cursor: pointer;
   }
 
   
