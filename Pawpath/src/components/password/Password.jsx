@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../../assets/LOGO.png';
 import { useLocation, useNavigate } from "react-router-dom";
 import './Password.css'
+import voltar from '../../assets/voltar.png'
+
 export default function Password() {
-    const [userImage, setUserImage] = useState(null);
-    const [userNome, setUserNome] = useState(null);
     const [userPass, setUserPass] = useState(null);
     const [novaSenha, setNovaSenha] = useState('');
     const location = useLocation();
@@ -13,12 +12,6 @@ export default function Password() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!id) {
-            console.error("ID não fornecido!");
-            navigate('/error'); // Redireciona para uma página de erro
-            return;
-        }
-
         const fetchUsuarios = async () => {
             const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
             try {
@@ -30,8 +23,6 @@ export default function Password() {
                 const data = await response.json();
                 const encontrado = data.folha1.find(user => user.id === id);
                 if (encontrado) {
-                    setUserImage(encontrado.image);
-                    setUserNome(encontrado.nome);
                     setUserPass(encontrado.password);
                 } else {
                     console.error("Usuário não encontrado.");
@@ -70,9 +61,18 @@ export default function Password() {
         }
     };
 
+    const handleImageClick = () => {
+        navigate('/User', { state: { id } });
+    };
+
     return (
         <div className="user-container">
-            
+            <img
+                src={voltar}
+                onClick={handleImageClick}
+                alt="Voltar"
+                className="voltar"
+            />
             <div className="password-atual">
                 <p className="password">
                     Palavra pass: {hidden ? '•'.repeat(userPass?.length || 0) : userPass}

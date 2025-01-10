@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from '../../assets/LOGO.png';
 import './User.css';
 import { useLocation, useNavigate } from "react-router-dom";
+import voltar from '../../assets/voltar.png';
 
 export default function User() {
     const [userImage, setUserImage] = useState(null);
@@ -50,9 +51,20 @@ export default function User() {
     const handleImageClick = () => {
         navigate('/Password', { state: { id } });
     };
+    const handleVoltarClick = () => {
+        navigate('/FeedProcurado', { state: { id } });
+};
 
     return (
+
         <div className="user-container">
+            <img 
+                        src={voltar} 
+                        onClick={handleVoltarClick} 
+                        alt="User" 
+                        className="voltar" 
+                        
+           />
             <div className="top">
                 <img src={userImage || logo} alt={userNome || 'Usuário'} className="image" />
                 <p className="nome">Bem-vindo, {userNome || 'Usuário'}!</p>
