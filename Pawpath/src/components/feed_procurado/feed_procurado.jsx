@@ -11,5 +11,6 @@ export default function FeedProcurado() {
         <div>
             <Navbar id={id} />
         </div>
+        
     );
 }

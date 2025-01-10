@@ -21,7 +21,7 @@ const Login = () => {
             }
             const data = await response.json();
             console.log("Dados recebidos:", data);
-            setUsuarios(data.folha1 || []); // Verifique a chave correta
+            setUsuarios(data.folha1 || []);   //colocar Usuarios como um array de elemnros da bd
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
         }
@@ -30,21 +30,13 @@ const Login = () => {
     // Função para validar o login
     const validarLogin = (e) => {
         e.preventDefault();
-        console.log("Estado atual de usuarios:", usuarios); // Log para verificar o estado dos usuários
 
-        // Verifica se os usuários foram carregados
-        if (!usuarios || usuarios.length === 0) {
-            setErro('Erro ao carregar usuários. Tente novamente mais tarde.');
-            return;
-        }
-
-        // Verifica se existe o usuário na base de dados (ajustando as chaves para 'nome' e 'password')
+        // Verifica se existe o usuário na base de dados, com o nome e password inseridos
         const usuario = usuarios.find(user => user.nome === nome && user.password === senha);
 
         if (usuario) {
-            alert('Login bem-sucedido');
-            // Aqui você pode recuperar a imagem e redirecionar para a página com a imagem
-            navigate('/FeedProcurado', { state: { id: usuario.id } }); // Envia a imagem via estado de navegação
+            alert('Login bem-sucedido'); 
+            navigate('/FeedProcurado', { state: { id: usuario.id } }); // Envia o id via estado de navegação
         } else {
             setErro('Nome de usuário ou senha inválidos.');
         }

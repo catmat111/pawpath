@@ -1,4 +1,3 @@
-/* Reset geral para garantir que todos os elementos comecem sem margens e padding */
 * {
   margin: 0;
   padding: 0;
@@ -7,24 +6,23 @@
 }
 
 
-/* Container principal do formulário */
 form div {
   background-color: #a07a6a;
   margin: auto;
   padding: 2rem;
-  width: 50%; /* Largura do formulário em telas grandes */
+  
   border: 1px solid black;
   border-radius: 20px;
   display: flex;
-  justify-content: space-between; /* Garante que as divs fiquem lado a lado */
-  align-items: flex-start; /* Alinha os itens no topo */
-  gap: 0rem; /* Espaço entre as divs */
-  flex-wrap: wrap; /* Permite que os itens se reorganizem em telas pequenas */
+  justify-content: space-between; 
+  align-items: flex-start; 
+  gap: 0rem; 
+  flex-wrap: wrap; 
 }
 
-/* Estilo da div que contém a imagem */
+
 .div-esquerda {
-  width: 30%; /* A div da esquerda ocupa 40% da largura */
+  width: 30%; 
   text-align: center;
   margin-bottom: 1rem;
   float:left;
@@ -38,12 +36,12 @@ form div {
   max-width: 200px;
   border-radius: 20%;
   margin-bottom: 1rem;
-  object-fit: cover; /* Garante que a imagem preencha bem o espaço */
+  object-fit: cover; 
 }
 
-/* Estilo da div que contém os inputs */
+
 .div-direita {
-  width: 50%; /* A div da direita ocupa 55% da largura */
+  width: 50%; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,7 +49,7 @@ form div {
   height: 5%;
 }
 
-/* Cabeçalho */
+
 h2 {
   color: #303b0f;
   text-align: center;
@@ -60,7 +58,6 @@ h2 {
   padding-left: 40%;
 }
 
-/* Estilo dos campos de input */
 .inputs {
   width: 100%;
   padding: 1rem;
@@ -73,12 +70,8 @@ h2 {
   transition: border-color 0.3s ease;
 }
 
-.inputs:focus {
-  border-color: #606a3c; /* Cor de borda quando o campo estiver em foco */
-  outline: none;
-}
 
-/* Estilo do botão de enviar */
+
 #botao {
   background-color: #303b0f;
   color: white;
@@ -88,14 +81,14 @@ h2 {
   padding: 1rem;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.7s ease;
 }
 
 #botao:hover {
   background-color: #606a3c;
 }
 
-/* Estilo para o input de imagem */
+
 input[type="file"] {
   display: none;
 }
@@ -109,19 +102,19 @@ input[type="file"] {
   cursor: pointer;
   color: white;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.7s ease;
 }
 
 .imagem-input:hover {
   background-color: #606a3c;
 }
 
-/* Responsividade para telas pequenas e médias */
+
 @media (max-width: 1024px) {
   form div {
-    width: 90%; /* O formulário ocupa mais espaço em telas menores */
-    flex-direction: column; /* As divs serão empilhadas verticalmente */
-    align-items: center; /* Centraliza as divs */
+    width: 90%; 
+    flex-direction: column; 
+    align-items: center; 
     padding: 1.5rem;
     
   }
@@ -130,8 +123,8 @@ input[type="file"] {
 
 @media (max-width: 768px) {
   form div {
-    width: 95%; /* O formulário ocupa 90% da largura */
-    flex-direction: column; /* As divs serão empilhadas verticalmente */
+    width: 95%; 
+    flex-direction: column; 
     align-items: center;
     padding: 1rem;
   }
@@ -140,8 +133,8 @@ input[type="file"] {
 
 @media (max-width: 480px) {
   form div {
-    width: 100%; /* O formulário ocupa 100% da largura */
-    flex-direction: column; /* As divs serão empilhadas verticalmente */
+    width: 100%; 
+    flex-direction: column; 
     padding: 1rem;
     align-items: center;
   }

@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 export default function Sign_in() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [image, setImage] = useState(anonimo); // Inicializando com a imagem 'anonimo'
+  const [image, setImage] = useState(anonimo); // Inicializando com a imagem 'anonimo' --> imagem default
   const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
   const navigate = useNavigate();
-  
 
-  // Função para buscar todos os usuários e calcular o próximo ID
+
+  // Função para buscar todos os utilizadores e calcular o próximo ID
   const getNextId = async () => {
     try {
       const response = await fetch(url);
@@ -21,9 +21,9 @@ export default function Sign_in() {
       }
 
       const data = await response.json();
-      const users = data.folha1; // Supondo que os dados retornados sejam uma lista de usuários
+      const users = data.folha1; // todos os utilizadores
 
-      // Se não houver usuários, o ID começa do 1
+      // Se não houver usuários, o ID começa do 1 (caso se tenha de reiniciar a api)
       if (users.length === 0) {
         return 1;
       }
@@ -48,13 +48,13 @@ export default function Sign_in() {
   };
 
   // Função para verificar se o nome de usuário já existe na base de dados
-  const checkIfUserExists = async (name) => {
+  const validar_utilizador = async (name) => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Erro ao verificar usuário');
       }
-      
+
       const data = await response.json();
       const users = data.folha1; // Supondo que os dados retornados sejam uma lista de usuários
 
@@ -69,10 +69,10 @@ export default function Sign_in() {
     }
   };
 
-  // Função para fazer o upload da imagem
-  const handleSubmit = async (e) => {
+  // Submeter tudo
+  const Submeter = async (e) => {
     e.preventDefault();
-  
+
     // Verificar se o nome e senha não estão vazios
     if (!name || !password) {
       alert('Por favor, preencha todos os campos!');
@@ -80,23 +80,25 @@ export default function Sign_in() {
     }
 
     // Verificar se o nome de usuário já existe
-    const userExists = await checkIfUserExists(name);
+    const userExists = await validar_utilizador(name);
 
+    //Não pode ter nomes iguais
     if (userExists) {
-      alert('Este nome de usuário já está em uso. Por favor, escolha outro.');
+      alert('Este nome já está a ser utilizado. Por favor, escolha outro.');
       return;
-    }
+    } else {
+      const userId = await getNextId();
 
-    // Usando a função getNextId para garantir o incremento sequencial
-    const userId = await getNextId();
-
-    const body = {
-      folha1: {
-        id: userId,
-        nome: name,
-        password: password,
-        image: image // A imagem estará em Base64 ou 'anonimo'
+      const body = {
+        folha1: {
+          id: userId,
+          nome: name,
+          password: password,
+          image: image
+        }
       }
+
+
     };
 
     try {
@@ -117,21 +119,20 @@ export default function Sign_in() {
       alert('Conta criada com sucesso!');
       navigate('/Login');
     } catch (error) {
-      console.log('Dados enviados:', JSON.stringify(body)); // Verifique o que está sendo enviado
       console.error('Erro ao criar usuário:', error);
       alert('Erro ao criar conta.');
     }
   };
 
-  // Função para lidar com o upload da imagem e validação do tamanho
-  const handleImageChange = async (e) => {
+  // Mudar a imagem default
+  const Mudar_imagem = async (e) => {
     const selectedImage = e.target.files[0];
     if (selectedImage) {
-      // Limite de 1MB para a imagem
-      const MAX_SIZE = 50 * 1024; // 1MB
+      // Limite de 50Kb para a imagem
+      const MAX_SIZE = 50 * 1024; // 50Kb
 
       if (selectedImage.size > MAX_SIZE) {
-        alert('A imagem é muito grande. Por favor, escolha uma imagem de até 1MB.');
+        alert('A imagem é muito grande. Por favor, escolha uma imagem de até 50Kb');
         return;
       }
 
@@ -142,7 +143,7 @@ export default function Sign_in() {
         console.error('Erro ao processar a imagem:', error);
         alert('Erro ao processar a imagem.');
       }
-    } else {
+    } else { //quando nâo se é selecionado uma imagem válida
       alert('Por favor, selecione uma imagem válida.');
     }
   };
@@ -150,11 +151,11 @@ export default function Sign_in() {
   return (
     <div>
       <div >
-        <img src={logo} alt="Logo" className="logo"/>
+        <img src={logo} alt="Logo" className="logo" />
       </div>
       <h2>Crie sua Conta</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={Submeter}>
         <div className="div-esquerda">
           <img id='anonimo' src={image} alt="Imagem do usuário" />
           {/* Upload da imagem */}
@@ -164,7 +165,7 @@ export default function Sign_in() {
               className="inputs"
               type="file"
               accept="image/*"
-              onChange={handleImageChange}
+              onChange={Mudar_imagem}
             />
           </label>
         </div>
@@ -178,7 +179,7 @@ export default function Sign_in() {
             onChange={(e) => setName(e.target.value)}
             required
           />
-          {/* Senha */}
+          {/* Password */}
           <input
             className="inputs"
             type="password"

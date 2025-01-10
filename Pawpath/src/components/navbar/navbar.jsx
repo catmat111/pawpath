@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './navbar.css';
-import logo from '../../assets/LOGO.png'; // Supondo que o logo esteja no mesmo diretório
+import logo from '../../assets/LOGO.png'; 
 import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ id }) => {
-    const [userImage, setUserImage] = useState(null); // Estado para armazenar a imagem do usuário
-    const [usuario, setUsuario] = useState(null); // Estado para armazenar os dados do usuário
-    const navigate = useNavigate(); // Inicializa o hook de navegação
+    const [userImage, setUserImage] = useState(null); 
+    const [usuario, setUsuario] = useState(null); 
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchUsuarios = async () => {
@@ -15,16 +15,13 @@ const Navbar = ({ id }) => {
                 const response = await fetch(url);
                 console.log("Resposta da API:", response);
 
-                if (!response.ok) {
+                if (!response.ok) 
                     throw new Error(`Erro na requisição: ${response.status}`);
-                }
-
+                
                 const data = await response.json();
-                console.log("Dados recebidos:", data);
-
-                // Procurar o usuário diretamente nos dados retornados
+                // Procurar o utilisador
                 const encontrado = data.folha1.find(user => user.id === id);
-                console.log("Usuário encontrado:", encontrado);
+                
 
                 // Atualizar o estado do usuário e a imagem
                 if (encontrado) {
@@ -40,8 +37,11 @@ const Navbar = ({ id }) => {
 
         fetchUsuarios();
     }, [id]); // Dependência do id
-
-    const handleImageClick = () => {
+    
+    const post_clicar = () =>{
+        navigate('/Post', { state: { id: usuario.id } }); // Envia o ID do usuário para a nova página
+    }
+    const imagem_clicar = () => {
         if (usuario) {
             navigate('/User', { state: { id: usuario.id } }); // Envia o ID do usuário para a nova página
         } else {
@@ -62,6 +62,9 @@ const Navbar = ({ id }) => {
                     <li>
                         <a className='link' href="/Encontrei um animal">Encontrou-se</a>
                     </li>
+                    <li>
+                        <a className='link' onClick={post_clicar}>Fazer Post</a>
+                    </li>
                 </ul>
             </div>
             <div className="navbar-right">
@@ -69,7 +72,7 @@ const Navbar = ({ id }) => {
                 
                     <img 
                         src={userImage} 
-                        onClick={handleImageClick} 
+                        onClick={imagem_clicar} 
                         alt="User" 
                         className="user-image" 
                         style={{ cursor: "pointer" }} 

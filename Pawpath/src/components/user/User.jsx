@@ -13,46 +13,48 @@ export default function User() {
     const { id } = location.state || {};
     const navigate = useNavigate();
 
+
+    //Fetch 
+    const fetchUsuarios = async () => {
+        const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const encontrado = data.folha1.find(user => user.id === id);
+            if (encontrado) {
+                setUserImage(encontrado.image);
+                setUserNome(encontrado.nome);
+                setUserPass(encontrado.password);
+            } else {
+                console.error("Usuário não encontrado.");
+                navigate('/not-found'); // Redireciona se o usuário não for encontrado
+            }
+        } catch (error) {
+            console.error("Erro ao buscar dados:", error);
+        }
+    };
+
     useEffect(() => {
         if (!id) {
             console.error("ID não fornecido!");
             navigate('/error'); // Redireciona se o ID não for fornecido
             return;
         }
-
-        const fetchUsuarios = async () => {
-            const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`Erro na requisição: ${response.status}`);
-                }
-
-                const data = await response.json();
-                const encontrado = data.folha1.find(user => user.id === id);
-                if (encontrado) {
-                    setUserImage(encontrado.image);
-                    setUserNome(encontrado.nome);
-                    setUserPass(encontrado.password);
-                } else {
-                    console.error("Usuário não encontrado.");
-                    navigate('/not-found'); // Redireciona se o usuário não for encontrado
-                }
-            } catch (error) {
-                console.error("Erro ao buscar dados:", error);
-            }
-        };
-
         fetchUsuarios();
     }, [id, navigate]);
 
-    const toggleVisibility = () => setHidden(!hidden);
+    const Mudar_visibilidade = () => setHidden(!hidden);
 
-    const handleImageClick = () => {
+    const Mudar_password = () => {
         navigate('/Password', { state: { id } });
     };
 
-    const handleDeleteClick = async () => {
+    //Deletar conta
+    const Deletar = async () => {
         const confirmDelete = window.confirm('Você tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.');
 
         if (confirmDelete) {
@@ -75,7 +77,7 @@ export default function User() {
         }
     };
 
-    const handleVoltarClick = () => {
+    const voltar_clicar = () => {
         navigate('/FeedProcurado', { state: { id } });
     };
 
@@ -89,15 +91,15 @@ export default function User() {
         });
     };
 
-    // Função para lidar com o upload da imagem e validação do tamanho
-    const handleImageChange = async (e) => {
+    // mudar a imagem, só dá para 50Kb
+    const Mudar_imagem = async (e) => {
         const selectedImage = e.target.files[0];
         if (selectedImage) {
             // Limite de 50KB para a imagem
-            const MAX_SIZE = 50 * 1024; // 50KB
+            const MAX_SIZE = 50 * 1024; // 50Kb
 
             if (selectedImage.size > MAX_SIZE) {
-                alert('A imagem é muito grande. Por favor, escolha uma imagem de até 50KB.');
+                alert('A imagem é muito grande. Por favor, escolha uma imagem de até 50Kb');
                 return;
             }
 
@@ -132,38 +134,38 @@ export default function User() {
         <div className="user-container">
             <img 
                 src={voltar} 
-                onClick={handleVoltarClick} 
+                onClick={voltar_clicar} 
                 alt="Voltar" 
                 className="voltar" 
             />
             <div className="top">
                 <img 
-                    src={userImage || logo} 
-                    alt={userNome || 'Usuário'} 
+                    src={userImage}
+                    alt={userNome} 
                     className="image" 
                 />
-                <p className="nome">Bem-vindo, {userNome || 'Usuário'}!</p>
+                <p className="nome">Bem-vindo, {userNome}!</p>
             </div>
             <div className="password-container">
                 <p className="password">
-                    Palavra pass: {hidden ? '•'.repeat(userPass?.length || 8) : userPass || 'Senha não definida'}
+                    Palavra pass: {hidden ? '•'.repeat(userPass?.length || 8) : userPass}
                 </p>
-                <button onClick={toggleVisibility} className="mostrar">
+                <button onClick={Mudar_visibilidade} className="mostrar">
                     {hidden ? 'Mostrar' : 'Esconder'}
                 </button>
             </div>
             <div className="actions">
-                <p onClick={handleImageClick}>Alterar a palavra-passe</p>
+                <p onClick={Mudar_password}>Alterar a palavra-passe</p>
                 <label className='imagem-input'>
                     Escolher imagem
                     <input
                         className="inputs"
                         type="file"
                         accept="image/*"
-                        onChange={handleImageChange}
+                        onChange={Mudar_imagem}
                     />
                 </label>
-                <p onClick={handleDeleteClick}>Deletar conta</p>
+                <p onClick={Deletar}>Deletar conta</p>
             </div>
         </div>
     );

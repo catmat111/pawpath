@@ -6,6 +6,7 @@ import Inicial from './components/inicial/Inicial.jsx'
 import FeedProcurado from './components/feed_procurado/feed_procurado.jsx';
 import User from './components/user/User.jsx';
 import Password from './components/password/password.jsx';
+import Post from './components/Post/Post.jsx';
 
 import './App.css'
 
@@ -22,6 +23,8 @@ function App() {
                 <Route path="/FeedProcurado" element={<FeedProcurado />} /> {/* Página do feed procurado */}
                 <Route path="/User" element={<User />} /> {/* Página do user */}
                 <Route path="/Password" element={<Password />} /> {/* Página para mudar a palavra pass */}
+                <Route path="/Post" element={<Post />} /> {/* Página para criar Posts */}
+
             </Routes>
         </Router>
   )
