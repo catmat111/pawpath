@@ -8,36 +8,12 @@ export default function Post() {
     const location = useLocation();
     const { id } = location.state || {};
     const navigate = useNavigate();
-    const [usuario, setUsuario] = useState(null);
-    const [error, setError] = useState(null);
+    //variaveis para colocar na bd
     const [image, setImage] = useState(null);
     const [nome, setNome] = useState('');
     const [cor, setCor] = useState('#000000');
     const [text, setText] = useState(''); // Estado para o texto do input
 
-    const fetchUsuarios = async () => {
-        const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
-        try {
-            const response = await fetch(url);
-
-            if (!response.ok)
-                throw new Error(`Erro na requisição: ${response.status}`);
-
-            const data = await response.json();
-
-            const encontrado = data.folha1.find(user => user.id === id);
-
-            if (encontrado) {
-                setUsuario(encontrado);
-            } else {
-                console.error("Usuário não encontrado.");
-                setError("Usuário não encontrado.");
-            }
-        } catch (error) {
-            console.error("Erro ao buscar dados:", error);
-            setError("Erro ao buscar dados.");
-        }
-    };
 
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -73,9 +49,9 @@ export default function Post() {
         navigate('/FeedProcurado', { state: { id } });
     };
 
-    const handleSubmit = async () => {
-        if (!image || !text || !nome || !cor) {
-            alert('Por favor, preencha todos os campos antes de enviar.');
+    const Submeter = async () => {
+        if (!text || !nome || !cor) {
+            alert('Por favor, preencha pelo menos o nome, a descrição e a cor');
             return;
         }
 
@@ -96,7 +72,7 @@ export default function Post() {
         const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha2';
         const payload = {
             folha2: {
-                id: id,
+                iduti: id,
                 nome: nome,
                 cor: cor,
                 texto: text,
@@ -117,7 +93,7 @@ export default function Post() {
                 const errorMessage = await response.text();
                 throw new Error(`Erro ao salvar os dados: ${response.status} - ${errorMessage}`);
             }
-
+            
             alert('Dados enviados com sucesso!');
             setImage('');
             setText('');
@@ -129,47 +105,44 @@ export default function Post() {
         }
     };
 
-    useEffect(() => {
-        if (id)
-            fetchUsuarios();
-    }, [id]);
+   
 
     return (
-        <div className="user-container">
+        <div className="user-container_post">
             <img
                 src={voltar_img}
                 onClick={voltar_botao}
                 alt="Voltar"
-                className="voltar"
+                className="voltar_post"
             />
-            <div className="div-esquerda">
+            <div className="div-esquerda_post">
+                
+                <label className="imagem-input_post">
                 <img id="img" src={image || ''}  />
-                <label className="imagem-input">
-                    Escolher imagem
                     <input
-                        className="inputs"
+                        className="inputs_post_post"
                         type="file"
                         accept="image/*"
                         onChange={Mudar_imagem}
                     />
                 </label>
             </div>
-            <div className="div-direita">
+            <div className="div-direita_post">
 
                 <input
                     type="text"
                     value={nome}
                     onChange={(e) => setNome(e.target.value)}
-                    className="text-input"
+                    className="text-input_post"
                     placeholder='Nome do animal'
                 />
-                <label>Digite algo:</label>
+                <label>Descrição do animal:</label>
                 <input
                     type="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     placeholder="Digite um texto"
-                    className="text-input"
+                    className="text-input_post"
                 />
 
                 <input
@@ -179,13 +152,13 @@ export default function Post() {
                 />
 
                 <button
-                    className="submit"
-                    onClick={handleSubmit}
+                    className="submit_post"
+                    onClick={Submeter}
                 >
                     Enviar
                 </button>
             </div>
-            {error && <p>{error}</p>}
+           
         </div>
     );
 }

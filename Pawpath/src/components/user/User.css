@@ -28,6 +28,7 @@
     margin-bottom: 15px;
     object-fit: cover;
     transition: transform 0.4s ease;
+    cursor: pointer;
 }
 .image:hover{
     transform: scale(1.5);
@@ -65,6 +66,14 @@
 
 .mostrar:hover {
     background-color: #606a3c;
+}
+.logo_user {
+    position: absolute; /* Define o posicionamento absoluto */
+    top: 0; /* Alinha ao topo da página */
+    left: 0; /* Alinha à esquerda da página */
+    margin: 10px; /* Remove margens desnecessárias */
+    width: 25%; /* Define a largura como 50% do contêiner */
+    border-radius: 15px; /* Aplica bordas arredondadas */
 }
 
 

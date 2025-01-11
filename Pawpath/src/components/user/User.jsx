@@ -13,8 +13,7 @@ export default function User() {
     const { id } = location.state || {};
     const navigate = useNavigate();
 
-
-    //Fetch 
+    // Fetch dados do usuário
     const fetchUsuarios = async () => {
         const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
         try {
@@ -53,13 +52,12 @@ export default function User() {
         navigate('/Password', { state: { id } });
     };
 
-    //Deletar conta
+    // Deletar conta
     const Deletar = async () => {
         const confirmDelete = window.confirm('Você tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.');
 
         if (confirmDelete) {
             try {
-                // Enviar requisição DELETE para a API
                 const response = await fetch(`https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1/${id}`, {
                     method: 'DELETE',
                 });
@@ -81,7 +79,7 @@ export default function User() {
         navigate('/FeedProcurado', { state: { id } });
     };
 
-    // Função para converter imagem em Base64
+    // Converter imagem em Base64
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -91,35 +89,33 @@ export default function User() {
         });
     };
 
-    // mudar a imagem, só dá para 50Kb
+    // Mudar imagem (limite de 50Kb)
     const Mudar_imagem = async (e) => {
         const selectedImage = e.target.files[0];
         if (selectedImage) {
-            // Limite de 50KB para a imagem
-            const MAX_SIZE = 50 * 1024; // 50Kb
-
+            const MAX_SIZE = 50 * 1024; // Limite de 50Kb
+    
             if (selectedImage.size > MAX_SIZE) {
-                alert('A imagem é muito grande. Por favor, escolha uma imagem de até 50Kb');
+                alert('A imagem é muito grande. Por favor, escolha uma imagem de até 50Kb.');
                 return;
             }
-
+    
             try {
                 const base64Image = await convertToBase64(selectedImage);
-                setUserImage(base64Image); // Atualiza para a imagem em Base64
-
-                // Atualiza a imagem na API
+                setUserImage(base64Image); // Atualiza a imagem na interface
+    
                 const response = await fetch(`https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1/${id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        folha1: { image: base64Image },
+                        folha1: { image: base64Image }, 
                     }),
                 });
-
+    
                 if (!response.ok) {
                     throw new Error(`Erro ao atualizar a imagem: ${response.status}`);
                 }
-
+    
                 alert("Imagem atualizada com sucesso!");
             } catch (error) {
                 console.error('Erro ao processar a imagem ou atualizar a API:', error);
@@ -129,22 +125,38 @@ export default function User() {
             alert('Por favor, selecione uma imagem válida.');
         }
     };
+    
 
     return (
+        <>
+        <img src= {logo}className='logo_user'></img>
         <div className="user-container">
-            <img 
-                src={voltar} 
-                onClick={voltar_clicar} 
-                alt="Voltar" 
-                className="voltar" 
+            
+            <img
+                src={voltar}
+                onClick={voltar_clicar}
+                alt="Voltar"
+                className="voltar"
             />
             <div className="top">
-                <img 
-                    src={userImage}
-                    alt={userNome} 
-                    className="image" 
-                />
-                <p className="nome">Bem-vindo, {userNome}!</p>
+                <div className="image-container">
+                    <label htmlFor="file-input">
+                        <img
+                            src={userImage} // Fallback para logo
+                            alt={userNome || "Usuário"} // Fallback para texto alternativo
+                            className="image"
+                        />
+                    </label>
+                    <input
+                        id="file-input"
+                        className="inputs"
+                        type="file"
+                        accept="image/*"
+                        onChange={Mudar_imagem}
+                        style={{ display: 'none' }} // Oculta o input
+                    />
+                </div>
+                <p className="nome">Bem-vindo, {userNome || "Usuário"}!</p>
             </div>
             <div className="password-container">
                 <p className="password">
@@ -156,17 +168,8 @@ export default function User() {
             </div>
             <div className="actions">
                 <p onClick={Mudar_password}>Alterar a palavra-passe</p>
-                <label className='imagem-input'>
-                    Escolher imagem
-                    <input
-                        className="inputs"
-                        type="file"
-                        accept="image/*"
-                        onChange={Mudar_imagem}
-                    />
-                </label>
                 <p onClick={Deletar}>Deletar conta</p>
             </div>
-        </div>
+        </div></>
     );
 }
