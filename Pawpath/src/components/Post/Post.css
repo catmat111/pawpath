@@ -25,12 +25,13 @@
 
 
 .div-esquerda_post {
+  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: transparent; /* Removido fundo redundante */
-  margin: 20px 50px; /* Espaçamento refinado */
+  margin: 20px 20px 0px 50px; 
 }
 
 #img {
@@ -45,6 +46,7 @@
 }
 
 .imagem-input_post {
+  
   background-color: white;
   padding: 15px 20px;
   border-radius: 8px;

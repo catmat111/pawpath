@@ -31,6 +31,7 @@
   outline: none;
   background-color: hsl(25, 100%, 96%); 
   transition: border-color 0.3s ease;
+  color:#333
 }
 
 .lupa{
