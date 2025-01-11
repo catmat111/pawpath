@@ -6,11 +6,13 @@
 }
 
 
+
+
 form div {
+  
   background-color: #a07a6a;
   margin: auto;
-  padding: 2rem;
-  
+  padding: 1rem;
   border: 1px solid black;
   border-radius: 20px;
   display: flex;
@@ -22,20 +24,19 @@ form div {
 
 
 .div-esquerda {
-  width: 30%; 
+  width: 35%; 
   text-align: center;
   margin-bottom: 1rem;
   float:left;
-  margin-left: 15%;
-  size: 40%;
+  margin-left: 10%;
+  
 }
 
 #anonimo {
   width: 100%;
+  max-width: 150px;
   height: auto;
-  max-width: 200px;
-  border-radius: 20%;
-  margin-bottom: 1rem;
+  border-radius: 10%;
   object-fit: cover; 
 }
 
@@ -98,10 +99,10 @@ input[type="file"] {
   border-radius: 10px;
   border: none;
   display: inline-block;
-  padding: 6px 20px;
+  padding: 15px;
   cursor: pointer;
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: background-color 0.7s ease;
 }
 
@@ -112,10 +113,10 @@ input[type="file"] {
 
 @media (max-width: 1024px) {
   form div {
-    width: 90%; 
+   
     flex-direction: column; 
     align-items: center; 
-    padding: 1.5rem;
+    padding: 1rem;
     
   }
 
@@ -123,7 +124,7 @@ input[type="file"] {
 
 @media (max-width: 768px) {
   form div {
-    width: 95%; 
+   
     flex-direction: column; 
     align-items: center;
     padding: 1rem;
@@ -133,7 +134,7 @@ input[type="file"] {
 
 @media (max-width: 480px) {
   form div {
-    width: 100%; 
+    
     flex-direction: column; 
     padding: 1rem;
     align-items: center;
