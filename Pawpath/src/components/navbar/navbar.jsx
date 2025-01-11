@@ -3,6 +3,7 @@ import './navbar.css';
 import logo from '../../assets/LOGO.png'; 
 import { useNavigate } from "react-router-dom";
 
+
 const Navbar = ({ id }) => {
     const [userImage, setUserImage] = useState(null); 
     const [usuario, setUsuario] = useState(null); 
@@ -52,7 +53,9 @@ const Navbar = ({ id }) => {
     return (
         <nav className='navbar'>
             <div className="navbar-left">
+                
                 <img src={logo} alt='logo' className="logo" />
+                
             </div>
             <div className="navbar-center">
                 <ul className="nav-links">

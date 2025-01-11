@@ -52,6 +52,10 @@ export default function User() {
         navigate('/Password', { state: { id } });
     };
 
+    const logout = () =>{
+        navigate('/');
+    };
+
     // Deletar conta
     const Deletar = async () => {
         const confirmDelete = window.confirm('Você tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.');
@@ -169,6 +173,7 @@ export default function User() {
             <div className="actions">
                 <p onClick={Mudar_password}>Alterar a palavra-passe</p>
                 <p onClick={Deletar}>Deletar conta</p>
+                <p onClick={logout}>Log out</p>
             </div>
         </div></>
     );
