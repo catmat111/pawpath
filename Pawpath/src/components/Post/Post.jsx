@@ -54,21 +54,21 @@ export default function Post() {
             alert('Por favor, preencha pelo menos o nome, a descrição e a cor');
             return;
         }
-
+    
         // Limitar o tamanho do texto
         const maxTextLength = 50000;
         if (text.length > maxTextLength) {
             alert(`O texto ultrapassou o limite de ${maxTextLength} caracteres. Por favor, reduza o tamanho.`);
             return;
         }
-
+    
         // Verificar se o total de caracteres não excede 50.000
         const totalPayloadLength = text.length + (image ? image.length : 0);
         if (totalPayloadLength > 50000) {
             alert('O total de caracteres ultrapassou o limite de 50.000. Por favor, reduza o texto ou a imagem.');
             return;
         }
-
+    
         const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha2';
         const payload = {
             folha2: {
@@ -77,9 +77,10 @@ export default function Post() {
                 cor: cor,
                 texto: text,
                 imagem: image,
+                encontrado: 0, // Inicializa o atributo 'encontrado' como 0
             },
         };
-
+    
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -88,7 +89,7 @@ export default function Post() {
                 },
                 body: JSON.stringify(payload),
             });
-
+    
             if (!response.ok) {
                 const errorMessage = await response.text();
                 throw new Error(`Erro ao salvar os dados: ${response.status} - ${errorMessage}`);
@@ -104,6 +105,7 @@ export default function Post() {
             alert('Erro ao enviar os dados. Tente novamente. Detalhes: ' + error.message);
         }
     };
+    
 
    
 
