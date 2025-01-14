@@ -5,13 +5,15 @@ import { useLocation } from 'react-router-dom';
 import lupa from '../../assets/lupa.png';
 
 export default function FeedProcurado() {
+    //Passar o id do utilizador atual
     const location = useLocation();
-    const { id } = location.state; // Remova o 'w' indesejado aqui
+    const { id } = location.state; 
+    
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(null);
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedPostId, setSelectedPostId] = useState(null); // Estado para o post selecionado
+    const [selectedPostId, setSelectedPostId] = useState(null);
 
     const apiUsuarios = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
     const apiPosts = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha2';
