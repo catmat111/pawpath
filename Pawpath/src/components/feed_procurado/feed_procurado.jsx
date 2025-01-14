@@ -5,20 +5,21 @@ import { useLocation } from 'react-router-dom';
 import lupa from '../../assets/lupa.png';
 
 export default function FeedProcurado() {
-    //Passar o id do utilizador atual
     const location = useLocation();
-    const { id } = location.state; 
-    
+    const { id } = location.state;
+
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(null);
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedPostId, setSelectedPostId] = useState(null);
-
+    const [comentarios, setComentarios] = useState({});
+    const [allComentarios, setAllComentarios] = useState([]);
+    
     const apiUsuarios = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
     const apiPosts = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha2';
+    const apiComentarios = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha3';
 
-    // Fetch dos dados de usuários
     const fetchUsuarios = async () => {
         try {
             const response = await fetch(apiUsuarios);
@@ -30,7 +31,6 @@ export default function FeedProcurado() {
         }
     };
 
-    // Fetch dos posts
     const fetchPosts = async () => {
         try {
             const response = await fetch(apiPosts);
@@ -43,12 +43,23 @@ export default function FeedProcurado() {
         }
     };
 
+    const fetchComentarios = async () => {
+        try {
+            const response = await fetch(apiComentarios);
+            if (!response.ok) throw new Error(`Erro ao buscar comentários: ${response.status}`);
+            const data = await response.json();
+            setAllComentarios(data.folha3 || []);
+        } catch (error) {
+            console.error('Erro ao buscar comentários:', error);
+        }
+    };
+
     useEffect(() => {
         fetchUsuarios();
         fetchPosts();
+        fetchComentarios();
     }, []);
 
-    // Obter detalhes do usuário com base no ID
     const getUserDetails = (userId) => {
         const user = users.find((user) => user.id === userId);
         return {
@@ -57,27 +68,21 @@ export default function FeedProcurado() {
         };
     };
 
-    // Atualizar o atributo "encontrado" na API
     const updateEncontrado = async (postId, currentValue) => {
         try {
-            console.log('Atualizando post:', postId, 'Valor atual encontrado:', currentValue);
-
             const response = await fetch(`${apiPosts}/${postId}`, {
-                method: 'PUT', // PATCH ou PUT, dependendo do suporte da API
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    folha2: { encontrado: currentValue + 1 }, // Incrementa o valor atual
+                    folha2: { encontrado: currentValue + 1 },
                 }),
             });
 
             if (!response.ok) throw new Error(`Erro ao atualizar post: ${response.status}`);
 
             const responseData = await response.json();
-            console.log('Resposta da API:', responseData);
-
-            // Atualiza o estado local após sucesso
             setPosts((prevPosts) =>
                 prevPosts.map((post) =>
                     post.id === postId ? { ...post, encontrado: currentValue + 1 } : post
@@ -88,12 +93,49 @@ export default function FeedProcurado() {
         }
     };
 
-    // Atualizar o post selecionado
+    const addComentario = async (idPost, idUsuario, comentario) => {
+        if (!idUsuario || !idPost || !comentario) {
+            console.error("Dados inválidos para adicionar comentário:", { idUsuario, idPost, comentario });
+            return;
+        }
+
+        try {
+            const payload = {
+                folha3: {
+                    iduti: idUsuario,
+                    idpost: idPost,
+                    comentario: comentario,
+                },
+            };
+
+            const response = await fetch(apiComentarios, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) throw new Error(`Erro ao adicionar comentário: ${response.status}`);
+
+            const data = await response.json();
+            setAllComentarios((prev) => [...prev, data.folha3]);
+        } catch (error) {
+            console.error('Erro ao adicionar o comentário:', error);
+        }
+    };
+
+    const handleComentarioChange = (postId, value) => {
+        setComentarios((prev) => ({
+            ...prev,
+            [postId]: value,
+        }));
+    };
+
     const handlePostClick = (postId) => {
         setSelectedPostId(postId === selectedPostId ? null : postId);
     };
 
-    // Filtrar posts com base no termo de pesquisa
     const filteredPosts = posts.filter((post) => {
         const { nome: userName } = getUserDetails(post.iduti);
         const lowercasedSearchTerm = searchTerm.toLowerCase();
@@ -102,6 +144,15 @@ export default function FeedProcurado() {
             userName?.toLowerCase().includes(lowercasedSearchTerm)
         );
     });
+
+    const renderComentarios = (postId) => {
+        const comentariosDoPost = allComentarios.filter((comentario) => comentario.idpost === postId);
+        return comentariosDoPost.map((comentario, index) => (
+            <div key={index} className="comentario">
+                <p><strong>{getUserDetails(comentario.iduti).nome}:</strong> {comentario.comentario}</p>
+            </div>
+        ));
+    };
 
     return (
         <div className="feed-container">
@@ -124,8 +175,8 @@ export default function FeedProcurado() {
                         return (
                             <div
                                 key={post.id}
-                                className="post"
-                                onClick={() => handlePostClick(post.id)} // Atualiza o post selecionado
+                                className={`post ${selectedPostId === post.id ? 'selected' : ''}`}
+                                onClick={() => handlePostClick(post.id)}
                             >
                                 <div className="post-header">
                                     <img
@@ -142,26 +193,37 @@ export default function FeedProcurado() {
                                         className="post-image"
                                     />
                                     <p>Nome: {post.nome}</p>
-                                    <p>{post.texto || 'Descrição não fornecida.'} </p>
+                                    <p>{post.texto || 'Descrição não fornecida.'}</p>
                                     <p>Cor:</p>
                                     <div
                                         style={{ backgroundColor: post.cor }}
                                         className="cor"
                                     />
-                                    <p>Encontrado: {post.encontrado || 0} vezes</p>
+                                    <p>Comentado: {post.encontrado || 0} {post.encontrado === 1 ? 'vez' : 'vezes'}</p>
                                 </div>
-                                {/* Mostrar o botão apenas para o post selecionado */}
                                 {selectedPostId === post.id && (
-                                    <button
-                                        id="botao"
-                                        onClick={(e) => {
-                                            e.stopPropagation(); // Evitar conflito com clique no post
-                                            updateEncontrado(post.id, post.encontrado || 0);
-                                        }}
-                                    >
-                                        Encontrei
-                                    </button>
+                                    <div onClick={(e) => e.stopPropagation()} className='encontrou_area'>
+                                        <textarea
+                                            placeholder="Escreva um comentário..."
+                                            value={comentarios[post.id] || ''}
+                                            onChange={(e) => handleComentarioChange(post.id, e.target.value)}
+                                        />
+                                        <button
+                                            id='botao'
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                addComentario(post.id, id, comentarios[post.id] || '');
+                                                handleComentarioChange(post.id, '');
+                                                updateEncontrado(post.id, post.encontrado || 0);
+                                            }}
+                                        >
+                                            Adicionar Comentário
+                                        </button>
+                                    </div>
                                 )}
+                                <div className='comentarios'>
+                                    {renderComentarios(post.id)}
+                                </div>
                             </div>
                         );
                     })

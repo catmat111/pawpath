@@ -40,16 +40,16 @@
   padding-right:5px ;
 }
 
-/* Estilo quando o campo de pesquisa está focado */
+
 .search-input:focus {
-  border-color: #606a3c; /* Verde claro */
+  border-color: #606a3c; 
   background-color: #ffeee7;
   color:#606a3c;
 }
 
-/* Mensagem de erro (caso haja) */
+
 .error {
-  color: #5c2626; /* Vermelho escuro */
+  color: #5c2626; 
   text-align: center;
 }
 
@@ -137,6 +137,27 @@
   text-align: center;
   font-size: 18px;
   z-index: 1000;
+}
+
+.encontrou_area{
+  background-color: #471f1f;
+}
+.comentarios {
+  background-color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0; 
+  margin: 2px; 
+  border-style: double;
+}
+
+.comentarios p, strong{
+  background-color: #333;
+}
+
+.comentarios strong{
+  margin-left:6px;
 }
 
 @media (max-width: 768px) {

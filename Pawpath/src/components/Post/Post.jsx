@@ -96,7 +96,8 @@ export default function Post() {
                 cor: cor,
                 texto: text,
                 imagem: image,
-                encontrado: 0, // Inicializa o atributo 'encontrado' como 0
+                encontrado: 0,
+                comentarios:'',
             },
         };
 
