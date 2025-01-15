@@ -59,12 +59,7 @@ const Navbar = ({ id }) => {
             </div>
             <div className="navbar-center">
                 <ul className="nav-links">
-                    <li>
-                        <a className='link' href="/FeedProcurado">Procura-se</a>
-                    </li>
-                    <li>
-                        <a className='link' href="/Encontrei um animal">Encontrou-se</a>
-                    </li>
+                    
                     <li>
                         <a className='link' onClick={post_clicar}>Fazer Post</a>
                     </li>

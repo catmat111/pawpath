@@ -1,11 +1,9 @@
-/* Estilos para o container do usuário */
 .user-container {
    
     background-color: #a07a6a;
     position: relative;
     border-radius: 20px;
     box-shadow: 0px 16px 18px #303b0f;
-    color: white;
     font-family: sans-serif;
    
 }
@@ -51,33 +49,14 @@
     font-size: 1.2rem;  
 }
 
-.mostrar {
-    background-color: #303b0f;
-    color: white;
-    border-radius: 10px;
-    border: none;
-    width: 60%;
-    padding: 1rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.7s ease;
-    margin-top: 1rem;
-}
-
-.mostrar:hover {
-    background-color: #606a3c;
-}
 .logo_user {
-    position: absolute; /* Define o posicionamento absoluto */
-    top: 0; /* Alinha ao topo da página */
-    left: 0; /* Alinha à esquerda da página */
-    margin: 10px; /* Remove margens desnecessárias */
-    width: 25%; /* Define a largura como 50% do contêiner */
-    border-radius: 15px; /* Aplica bordas arredondadas */
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    margin: 10px; 
+    width: 25%; 
+    border-radius: 15px; 
 }
-
-
-
 
 .actions p {
     

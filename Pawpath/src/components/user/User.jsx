@@ -13,8 +13,8 @@ export default function User() {
     const { id } = location.state || {};
     const navigate = useNavigate();
 
-    // Fetch dados do usuário
-    const fetchUsuarios = async () => {
+    // Fetch dados do utilisador
+    const fetchUtilisadores= async () => {
         const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha1';
         try {
             const response = await fetch(url);
@@ -29,8 +29,8 @@ export default function User() {
                 setUserNome(encontrado.nome);
                 setUserPass(encontrado.password);
             } else {
-                console.error("Usuário não encontrado.");
-                navigate('/not-found'); // Redireciona se o usuário não for encontrado
+                console.error("Utilisador não encontrado.");
+                navigate('/not-found'); // Redireciona se o utilisador não for encontrado
             }
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
@@ -43,15 +43,16 @@ export default function User() {
             navigate('/error'); // Redireciona se o ID não for fornecido
             return;
         }
-        fetchUsuarios();
+        fetchUtilisadores();
     }, [id, navigate]);
-
+    //altera a visibilidade da palavra pass
     const Mudar_visibilidade = () => setHidden(!hidden);
 
     const Mudar_password = () => {
         navigate('/Password', { state: { id } });
     };
 
+    //volta para a página inicial
     const logout = () =>{
         navigate('/');
     };
@@ -71,7 +72,7 @@ export default function User() {
                 }
 
                 alert('Conta deletada com sucesso!');
-                navigate('/login'); // Redireciona para a página de login ou página inicial após deletar a conta
+                navigate('/'); // Redireciona para a página inicial
             } catch (error) {
                 console.error('Erro ao deletar a conta:', error);
                 alert('Erro ao deletar a conta. Tente novamente.');
@@ -146,8 +147,8 @@ export default function User() {
                 <div className="image-container">
                     <label htmlFor="file-input">
                         <img
-                            src={userImage} // Fallback para logo
-                            alt={userNome || "Usuário"} // Fallback para texto alternativo
+                            src={userImage} 
+                            alt={userNome || "Utilisador"} 
                             className="image"
                         />
                     </label>
@@ -157,14 +158,13 @@ export default function User() {
                         type="file"
                         accept="image/*"
                         onChange={Mudar_imagem}
-                        style={{ display: 'none' }} // Oculta o input
                     />
                 </div>
-                <p className="nome">Bem-vindo, {userNome || "Usuário"}!</p>
+                <p className="nome">Bem-vindo, {userNome}!</p>
             </div>
             <div className="password-container">
                 <p className="password">
-                    Palavra pass: {hidden ? '•'.repeat(userPass?.length || 8) : userPass}
+                    Palavra pass: {hidden ? '•'.repeat(userPass?.length) : userPass}
                 </p>
                 <button onClick={Mudar_visibilidade} className="mostrar">
                     {hidden ? 'Mostrar' : 'Esconder'}

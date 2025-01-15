@@ -83,15 +83,15 @@ export default function Post() {
             return;
         }
 
-        // Gerando um id_post único de 3 caracteres
+        
         const id_post = generateUniqueId(); // Gerar ID único
-        console.log('ID do post gerado:', id_post); // Depuração para verificar o id gerado
+        
 
         const url = 'https://api.sheety.co/13ac488bcfe201a0f16f2046b162a2e3/api/folha2';
         const payload = {
             folha2: {
                 iduti: id,
-                idpost: id_post, // Incluindo o id_post gerado
+                idpost: id_post, 
                 nome: nome,
                 cor: cor,
                 texto: text,
@@ -101,7 +101,7 @@ export default function Post() {
             },
         };
 
-        console.log('Payload a ser enviado:', payload); // Depuração para verificar o conteúdo do payload
+        
 
         try {
             const response = await fetch(url, {
@@ -138,7 +138,7 @@ export default function Post() {
             />
             <div className="div-esquerda_post">
                 <label className="imagem-input_post">
-                    <img id="img" src={image || ''} alt="Imagem do animal" />
+                    <img id="img" src={image} alt="Imagem do animal" />
                     <input
                         className="inputs_post_post"
                         type="file"

@@ -142,6 +142,11 @@
 .encontrou_area{
   background-color: #471f1f;
 }
+
+.encontrou_area textarea{
+  color:#333;
+}
+
 .comentarios {
   background-color: #333;
   display: flex;

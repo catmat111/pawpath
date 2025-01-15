@@ -44,12 +44,12 @@ export default function Sign_in() {
     });
   };
 
-  // Função para verificar se o nome de usuário já existe na base de dados
+  // Função para verificar se o nome de utilisador já existe na base de dados
   const validar_utilizador = async (name) => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Erro ao verificar usuário');
+        throw new Error('Erro ao verificar utilisador');
       }
 
       const data = await response.json();
@@ -57,8 +57,8 @@ export default function Sign_in() {
 
       return users.some((user) => user.nome.toLowerCase() === name.toLowerCase());
     } catch (error) {
-      console.error('Erro ao verificar o usuário:', error);
-      alert('Erro ao verificar se o nome de usuário já existe.');
+      console.error('Erro ao verificar o utilisador:', error);
+      alert('Erro ao verificar se o nome de utilisador já existe.');
       return false;
     }
   };
@@ -105,11 +105,11 @@ export default function Sign_in() {
       }
 
       const json = await response.json();
-      console.log('Usuário criado com sucesso:', json.folha1);
+      console.log('Utilisador criado com sucesso:', json.folha1);
       alert('Conta criada com sucesso!');
       navigate('/Login');
     } catch (error) {
-      console.error('Erro ao criar usuário:', error);
+      console.error('Erro ao criar utilisador:', error);
       alert('Erro ao criar conta.');
     }
   };
@@ -147,7 +147,7 @@ export default function Sign_in() {
       <form className="form_signin" onSubmit={Submeter}>
         <div className="div-esquerda">
           <label className="imagem-input">
-            <img id="anonimo" src={image} alt="Imagem do usuário" />
+            <img id="anonimo" src={image} alt="Imagem do utilisador" />
             Escolha uma imagem
             <input
               className="inputs"

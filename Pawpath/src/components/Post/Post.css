@@ -1,22 +1,21 @@
-/* Estilização aprimorada para o layout */
 .user-container_post {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   padding: 20px;
-  background-color: #a07a6a; /* Cor de fundo mais suave */
-  color: #4a2d2d; /* Cor de texto com maior contraste */
+  background-color: #a07a6a; 
+  color: #4a2d2d; 
   border-radius: 12px;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
   width: 95%;
-  max-width: 600px; /* Largura máxima para dispositivos maiores */
+  max-width: 600px; 
   margin: 50px auto;
 }
 
 .voltar_post {
   cursor: pointer;
   position: absolute;
-  background-color: #a07a6a; /* Cor de fundo mais suave */
+  background-color: #a07a6a; 
   width: 35px;
   height: 35px;
   
@@ -30,7 +29,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: transparent; /* Removido fundo redundante */
+  background-color: transparent; 
   margin: 20px 20px 0px 50px; 
 }
 
@@ -40,8 +39,8 @@
   
   object-fit: cover;
   margin-bottom: 30px;
-  background-color: #8a8f6e; /* Tom verde suave */
-  border-radius: 4%; /* Tornar imagem circular */
+  background-color: #8a8f6e; 
+  border-radius: 4%; 
   border: 2px solid black;
 }
 
@@ -62,7 +61,7 @@
 
 .imagem-input_post:hover {
   transform: scale(1.05);
-  background-color: #606a3c; /* Cor escurecida ao passar o mouse */
+  background-color: #606a3c; 
 }
 
 .content-container_post {
@@ -77,11 +76,11 @@
   width: 100%;
   padding: 12px;
   margin: 10px 0;
-  border: 1px solid #d1b89f; /* Borda mais clara */
+  border: 1px solid #d1b89f; 
   border-radius: 8px;
   font-size: 14px;
-  background-color: #fff7f0; /* Fundo mais claro */
-  color: #4a2d2d; /* Texto em contraste com fundo */
+  background-color: #fff7f0;
+  color: #4a2d2d; 
   transition: border-color 0.3s ease;
 }
 
@@ -91,7 +90,7 @@
 }
 
 .submit_post {
-  background-color: #4a2d2d; /* Verde escuro */
+  background-color: #4a2d2d; 
   color: #fff;
   padding: 12px 30px;
   border: none;
@@ -103,7 +102,7 @@
 }
 
 .submit_post:hover {
-  background-color: #606a3c; /* Cor mais clara ao passar o mouse */
+  background-color: #606a3c; 
   transform: scale(1.02);
 }
 
