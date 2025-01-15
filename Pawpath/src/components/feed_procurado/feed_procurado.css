@@ -13,7 +13,7 @@
   margin-top: 20px;
 }
 
-/* Contêiner da barra de pesquisa */
+/* bloco da barra de pesquisa */
 .search-container {
   display: flex;
   justify-content: center;
